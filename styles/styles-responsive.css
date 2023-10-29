@@ -1,11 +1,30 @@
 @media (max-width: 991px) {
-  
+  .actions {
+    flex-direction: column-reverse;
+  }
 }
 
 @media (max-width: 768px) {
-  
+  .create-todo {
+    max-width: 100%;
+  }
 }
 
 @media (max-width: 550px) {
-  
+  .todo-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .actions {
+    align-items: stretch;
+  }
+
+  .input-search {
+    width: 100%;
+  }
+
+  .filter {
+    justify-content: center;
+    gap: 1rem;
+  }
 }
