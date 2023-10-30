@@ -1,14 +1,15 @@
 
-import Toast from "./Toast.js";
+import toast from "./Toast.js";
+import timeCalculation from "../utilities/TimeCalculation.js";
 
-const CreateTodo = () => {
+const createTodo = () => {
   const buttonCreate = document.querySelector('#buttonCreate');
-  const createTodo = document.querySelector('.create-todo');
-  const cancelTodoBtn = document.querySelector('#cancelTodo');
-  const textArea = document.querySelector('.area');
+  const createTodo = document.querySelector('#createTodo');
+  const cancelTodoButton = document.querySelector('#cancelTodo');
+  const textArea = document.querySelector('#enterTodo');
 
   const addTodoBtn = document.querySelector('#addTodo');
-  const todoWrapper = document.querySelector('.todo-wrapper');
+  const todoWrapper = document.querySelector('#todoWrapper');
 
   const openCreateTodo = () => {
     createTodo.classList.add('open-create-todo');
@@ -21,7 +22,7 @@ const CreateTodo = () => {
   }
 
   buttonCreate.addEventListener('click', openCreateTodo);
-  cancelTodoBtn.addEventListener('click', cancelTodo);
+  cancelTodoButton.addEventListener('click', cancelTodo);
 
   const emptyNotice = document.createElement('h2');
 
@@ -30,53 +31,43 @@ const CreateTodo = () => {
     todoWrapper.appendChild(emptyNotice)
   }
 
+  let todos = [];
+
   const addTodo = () => {
-    const messageConfirmation = Toast('Please enter todo', 'error');
+    const emptyTodoErrorNotice = toast('Please enter todo', 'error');
 
     if(!textArea.value) {
-      todoWrapper.appendChild(messageConfirmation);
+      todoWrapper.appendChild(emptyTodoErrorNotice);
       setTimeout(() => {
-        messageConfirmation.remove();
-      }, 2000)
+        emptyTodoErrorNotice.remove();
+      }, 2000);
+
+      return;
     }
 
-    const todo = document.createElement('div');
-    todo.classList.add('todo');
+    const todoDiv = document.createElement('div');
+    todoDiv.classList.add('todo');
 
     const todoHeader = document.createElement('h1');
     todoHeader.classList.add('title-task');
-    todoHeader.innerText = textArea.value;
 
     const todoDetails = document.createElement('div');
     todoDetails.classList.add('todo-details');
 
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
-    const currentDate = new Date();
-    const currentMinutes = currentDate.getMinutes();
-    const currentHour = currentDate.getHours();
-    const currentDay = currentDate.getDate();
-    const currentMonth = currentDate.getMonth();
-    const currentYear = currentDate.getFullYear();
-    const minutes = currentMinutes.toString().padStart(2, '0');
-
-    
-    const hourCalculation = () => {
-      let hour;
-      let amPm = 'AM';
-      if(currentHour > 12) {
-        hour = currentHour - 12;
-        amPm = 'PM';
-      } else {
-        hour = currentHour;
-      }
-
-      return {hour, amPm};
+    const todo = {
+      title: textArea.value,
+      isDone: false,
+      isEditing: false,
+      createdAt: timeCalculation(),
     }
-
-    const { hour, amPm } = hourCalculation();
-
-    todoDetails.innerHTML = `<div class="created-at">Created at: <strong>${hour}:${minutes}${amPm}, ${currentDay}-${months[currentMonth]}-${currentYear}</strong></div>`;
+    todos.push(todo);
+    todos.map((todo) => {
+      const { title, isDone, isEditing, createdAt } = todo;
+      const {hour, minutes, amPm, currentDay, months, currentMonth, currentYear} = createdAt;
+      
+      todoHeader.innerText = title;
+      todoDetails.innerHTML = `<div class="created-at">Created at: <strong>${hour}:${minutes} ${amPm}, ${currentDay}-${months[currentMonth]}-${currentYear}</strong></div>`;
+    })
 
     const todoActions = document.createElement('div');
     todoActions.classList.add('todo-actions');
@@ -94,25 +85,25 @@ const CreateTodo = () => {
       </button>
     `
     
-    const todoSuccess = Toast('Successfully created new todo');
+    const todoSuccess = toast('Successfully created new todo');
 
     if(textArea.value) {
-      todo.append(todoHeader, todoDetails, todoActions);
-      todoWrapper.append(todo, todoSuccess);
-      todo.style.borderLeft = '5px solid #0ec277';
-      todo.style.background = 'linear-gradient(90deg, #daf5ea, #fff 15%)';
-      setTimeout(() => {
-        todoSuccess.remove();
-        todo.removeAttribute("style");
-      }, 2000);
+      todoDiv.append(todoHeader, todoDetails, todoActions);
+      todoWrapper.append(todoDiv, todoSuccess);
+      todoDiv.style.borderLeft = '5px solid #0ec277';
+      todoDiv.style.background = 'linear-gradient(90deg, #daf5ea, #fff 15%)';
+
       textArea.value = '';
       emptyNotice.remove();
+      setTimeout(() => {
+        todoSuccess.remove();
+        todoDiv.removeAttribute("style");
+      }, 2000);
     }
-    
   }
 
   addTodoBtn.addEventListener('click', addTodo);
 }
 
-export default CreateTodo;
+export default createTodo;
 

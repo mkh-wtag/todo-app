@@ -1,4 +1,4 @@
-const Toast = (message, type) => {
+const toast = (message, type) => {
   const toastWrapper = document.createElement('div');
   toastWrapper.classList.add('toast-wrapper');
   toastWrapper.innerText = message;
@@ -9,6 +9,6 @@ const Toast = (message, type) => {
   return toastWrapper;
 }
 
-export default Toast;
+export default toast;
 
 

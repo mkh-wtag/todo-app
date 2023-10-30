@@ -42,8 +42,8 @@
       <div class="create-holder">
         <button type="button" id="buttonCreate" class="button button-primary"><img src="./public/icon-plus.svg" alt="plus" /> Create</button>
 
-        <div class="create-todo">
-          <textarea class="input-field area" placeholder="Enter todo"></textarea>
+        <div class="create-todo" id="createTodo">
+          <textarea class="input-field area" id="enterTodo" placeholder="Enter todo"></textarea>
 
           <div class="create-todo-actions">
             <button class="button button-info" id="addTodo" type="button">Add todo</button>
@@ -58,7 +58,7 @@
 
     <!-- <div class="toast-wrapper">Hello</div> -->
 
-    <section class="todo-wrapper"></section>
+    <section class="todo-wrapper" id="todoWrapper"></section>
 
     <section class="load-more-wrapper">
       <button type="button" class="button button-info">Load more</button>
