@@ -1,4 +1,7 @@
-import CreateTodo from "./components/CreateTodo.js";
+// import CreateTodo from "./components/CreateTodo.js";
 
-CreateTodo();
+// CreateTodo();
 
+import initializeTodoApp from "./entry.js";
+
+initializeTodoApp();
