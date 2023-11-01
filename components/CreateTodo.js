@@ -1,4 +1,3 @@
-
 import toast from "./Toast.js";
 import timeCalculation from "../utilities/TimeCalculation.js";
 
@@ -34,12 +33,12 @@ const createTodo = () => {
   let todos = [];
 
   const addTodo = () => {
-    // const emptyTodoErrorNotice = toast('Please enter todo', 'error');
+    // const notifyUserNotice = toast('Please enter todo', 'error');
 
     // if(!textArea.value) {
-    //   todoWrapper.appendChild(emptyTodoErrorNotice);
+    //   todoWrapper.appendChild(notifyUserNotice);
     //   setTimeout(() => {
-    //     emptyTodoErrorNotice.remove();
+    //     notifyUserNotice.remove();
     //   }, 2000);
 
     //   return;
@@ -64,11 +63,19 @@ const createTodo = () => {
 
     todos.map((todo) => {
       const { title, isDone, isEditing, createdAt } = todo;
-      const {hour, minutes, amPm, currentDay, months, currentMonth, currentYear} = createdAt;
-      
+      const {
+        hour,
+        minutes,
+        amPm,
+        currentDay,
+        months,
+        currentMonth,
+        currentYear,
+      } = createdAt;
+
       todoHeader.innerText = title;
       todoDetails.innerHTML = `<div class="created-at">Created at: <strong>${hour}:${minutes} ${amPm}, ${currentDay}-${months[currentMonth]}-${currentYear}</strong></div>`;
-    })
+    });
 
     // const todoActions = document.createElement('div');
     // todoActions.classList.add('todo-actions');
@@ -85,27 +92,26 @@ const createTodo = () => {
     //     <img src="./public/icon-delete.svg" alt="delete" />
     //   </button>
     // `
-    
+
     // const todoSuccess = toast('Successfully created new todo');
 
-    if(textArea.value) {
+    if (textArea.value) {
       todoDiv.append(todoHeader, todoDetails, todoActions);
       todoWrapper.append(todoDiv, todoSuccess);
-      
-      todoDiv.style.borderLeft = '5px solid #0ec277';
-      todoDiv.style.background = 'linear-gradient(90deg, #daf5ea, #fff 15%)';
 
-      textArea.value = '';
+      todoDiv.style.borderLeft = "5px solid #0ec277";
+      todoDiv.style.background = "linear-gradient(90deg, #daf5ea, #fff 15%)";
+
+      textArea.value = "";
       emptyNotice.remove();
       setTimeout(() => {
         todoSuccess.remove();
         todoDiv.removeAttribute("style");
       }, 2000);
     }
-  }
+  };
 
-  addTodoBtn.addEventListener('click', addTodo);
-}
+  addTodoBtn.addEventListener("click", addTodo);
+};
 
 export default createTodo;
-
