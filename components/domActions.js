@@ -1,5 +1,4 @@
 import createButton from "../utilities/createButton.js";
-import notifyUser from "../utilities/notification.js";
 import { createTodoDiv, textArea } from "./domElements.js";
 import { todoWrapper } from "./domElements.js";
 import { todos } from "../entry.js";
@@ -17,11 +16,9 @@ export const cancelTodo = () => {
 export const renderTodoList = () => {
   todoWrapper.innerHTML = "";
 
-  if (todos) {
-    todos.forEach((todo) => {
-      todoWrapper.append(createTodoDomElement(todo));
-    });
-  }
+  todos.forEach((todo) => {
+    todoWrapper.append(createTodoDomElement(todo));
+  });
 };
 
 export const createTodoDomElement = (todo) => {
