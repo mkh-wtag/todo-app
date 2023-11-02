@@ -82,6 +82,7 @@ h6 {
 .title-task {
   font-size: 1.8rem;
   margin-bottom: 1.2rem;
+  line-height: 1.4em;
 }
 
 .container {
@@ -257,6 +258,7 @@ h6 {
   display: flex;
   justify-content: space-between;
   flex: 1;
+  gap: 1rem;
   margin-bottom: 1.5rem;
   text-shadow: 1px 1px 0 var(--white);
   font-size: 1.2rem;
@@ -264,8 +266,10 @@ h6 {
   font-style: italic;
 }
 
-.created-at,
-.completed-at {}
+.created-at strong,
+.completed-at strong {
+  color: var(--base-font-color);
+}
 
 .todo-actions {
   display: flex;
@@ -296,6 +300,7 @@ h6 {
   top: 0;
   left: 0;
   background: rgba(0, 0, 0, 0.4);
+  z-index: 11;
 }
 
 .popup {

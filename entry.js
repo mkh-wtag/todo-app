@@ -35,6 +35,7 @@ const initializeTodoApp = () => {
       isDone: false,
       isEditing: false,
       createdAt: timeCalculation(),
+      completedAt: null,
     };
     todos.push(todo);
 
