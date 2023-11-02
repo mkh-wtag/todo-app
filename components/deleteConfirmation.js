@@ -48,7 +48,6 @@ const deleteConfirmation = (message, id) => {
 
   function cancelHandler() {
     popupWrapper.remove();
-    return;
   }
 };
 

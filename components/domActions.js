@@ -15,7 +15,7 @@ export const cancelTodo = () => {
 };
 
 export function emptyListMessage() {
-  if (todoWrapper.innerHTML === "") {
+  if (todos.length === 0) {
     emptyNotice.innerText = "Todo list is empty";
     todoWrapper.appendChild(emptyNotice);
   }

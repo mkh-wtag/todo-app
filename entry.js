@@ -40,6 +40,7 @@ const initializeTodoApp = () => {
 
     renderTodoList();
     textArea.value = "";
+    textArea.focus();
     notifyUser("Successfully created new todo");
     emptyNotice.remove();
   };
