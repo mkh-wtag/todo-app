@@ -115,4 +115,5 @@ function completeTask(id) {
 
   setTodos(todos);
   renderTodoList();
+  localStorage.setItem("todos", JSON.stringify(todos));
 }

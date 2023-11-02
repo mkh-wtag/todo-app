@@ -12,6 +12,10 @@ const deleteConfirmation = (message, id) => {
   popup.className = "popup";
   popup.innerText = message;
 
+  setTimeout(() => {
+    popup.className += " popup-anim";
+  }, 1);
+
   const popupFooter = document.createElement("div");
   popupFooter.className = "popup-footer";
 
@@ -44,6 +48,7 @@ const deleteConfirmation = (message, id) => {
     setTodos(newTodos);
     renderTodoList();
     notifyUser("Successfully deleted todo item");
+    localStorage.setItem("todos", JSON.stringify(newTodos));
   }
 
   function cancelHandler() {

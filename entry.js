@@ -21,6 +21,15 @@ const initializeTodoApp = () => {
 
   emptyListMessage();
 
+  loadTodoList();
+
+  function loadTodoList() {
+    if (localStorage.getItem("todos") != null) {
+      todos = JSON.parse(localStorage.getItem("todos"));
+      renderTodoList();
+    }
+  }
+
   const handleTodoSubmit = () => {
     const task = textArea.value;
 
@@ -44,6 +53,8 @@ const initializeTodoApp = () => {
     textArea.focus();
     notifyUser("Successfully created new todo");
     emptyNotice.remove();
+
+    localStorage.setItem("todos", JSON.stringify(todos));
   };
 
   addTodoButton.addEventListener("click", handleTodoSubmit);
