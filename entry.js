@@ -7,7 +7,7 @@ import {
   emptyNotice,
 } from "./components/domElements.js";
 
-import { renderTodoList } from "./components/domActions.js";
+import { renderTodoList, emptyListMessage } from "./components/domActions.js";
 
 import { openCreateTodo, cancelTodo } from "./components/domActions.js";
 import notifyUser from "./utilities/notification.js";
@@ -19,10 +19,7 @@ const initializeTodoApp = () => {
   buttonCreate.addEventListener("click", openCreateTodo);
   cancelTodoButton.addEventListener("click", cancelTodo);
 
-  if (todoWrapper.innerHTML === "") {
-    emptyNotice.innerText = "Todo list is empty";
-    todoWrapper.appendChild(emptyNotice);
-  }
+  emptyListMessage();
 
   const handleTodoSubmit = () => {
     const task = textArea.value;
@@ -49,6 +46,10 @@ const initializeTodoApp = () => {
 
   addTodoButton.addEventListener("click", handleTodoSubmit);
 };
+
+export function setTodos(newTodos) {
+  todos = [...newTodos];
+}
 
 export default initializeTodoApp;
 

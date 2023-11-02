@@ -1,6 +1,7 @@
 import createButton from "../utilities/createButton.js";
+import deleteConfirmation from "../components/deleteConfirmation.js";
 import { createTodoDiv, textArea } from "./domElements.js";
-import { todoWrapper } from "./domElements.js";
+import { todoWrapper, emptyNotice } from "./domElements.js";
 import { todos } from "../entry.js";
 
 export const openCreateTodo = () => {
@@ -13,12 +14,21 @@ export const cancelTodo = () => {
   textArea.value = "";
 };
 
+export function emptyListMessage() {
+  if (todoWrapper.innerHTML === "") {
+    emptyNotice.innerText = "Todo list is empty";
+    todoWrapper.appendChild(emptyNotice);
+  }
+}
+
 export const renderTodoList = () => {
   todoWrapper.innerHTML = "";
 
   todos.forEach((todo) => {
     todoWrapper.append(createTodoDomElement(todo));
   });
+
+  emptyListMessage();
 };
 
 export const createTodoDomElement = (todo) => {
@@ -54,7 +64,8 @@ export const createTodoDomElement = (todo) => {
   const taskDelete = createButton(
     "button button-icon",
     "taskDelete",
-    "icon-delete.svg"
+    "icon-delete.svg",
+    () => deleteHandler(id)
   );
 
   todoActions.append(taskCompleted, taskEdit, taskDelete);
@@ -62,3 +73,7 @@ export const createTodoDomElement = (todo) => {
 
   return todoDiv;
 };
+
+function deleteHandler(id) {
+  deleteConfirmation("Are you sure you want to delete this?", id);
+}
