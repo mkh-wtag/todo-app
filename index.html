@@ -9,10 +9,60 @@
 </head>
 
 <body>
-  <div class="container">
-    
-  </div>
+  <header class="header">
+    <section class="container">
+      <div class="logo">
+        <img src="./public/logo.svg" alt="logo" />
+      </div>
+    </section>
+  </header>
 
-  <script type="module" defer src="./scripts/index.js"></script>
+  <main class="container">
+    <h1 class="title-main">
+      <span>My todo list</span>
+    </h1>
+
+    <form>
+      <section class="actions">
+        <div class="search-panel">
+          <input type="text" class="input-field input-search" placeholder="Search tasks" />
+          <button type="button" class="button button-icon button-search">
+            <img src="./public/icon-search.svg" alt="search icon" />
+          </button>
+        </div>
+  
+        <div class="filter">
+          Filter: 
+          <button type="button" class="button button-success">All</button>
+          <button type="button" class="button button-success">Incomplete</button>
+          <button type="button" class="button button-success">Complete</button>
+        </div>
+      </section>
+
+      <div class="create-holder">
+        <button type="button" id="buttonCreate" class="button button-primary"><img src="./public/icon-plus.svg" alt="plus" /> Create</button>
+
+        <div class="create-todo" id="createTodo">
+          <textarea class="input-field area" id="enterTodo" placeholder="Enter todo"></textarea>
+
+          <div class="create-todo-actions">
+            <button class="button button-info" id="addTodo" type="button">Add todo</button>
+
+            <button id="cancelTodo" class="button button-icon" type="button">
+              <img src="./public/icon-delete.svg" alt="delete" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <section class="todo-wrapper" id="todoWrapper"></section>
+
+    <section class="load-more-wrapper">
+      <button type="button" class="button button-info">Load more</button>
+    </section>
+  </main>
+
+  <script type="module" defer src="./index.js"></script>
 </body>
 </html>
