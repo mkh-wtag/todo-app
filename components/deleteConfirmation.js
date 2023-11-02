@@ -8,12 +8,19 @@ const deleteConfirmation = (message, id) => {
   const popupWrapper = document.createElement("div");
   popupWrapper.className = "popup-wrapper";
 
+  const popupLogo = document.createElement("div");
+  popupLogo.className = "popup-logo";
+  popupLogo.innerHTML = "<img src='./public/icon-delete.svg' alt='icon' />";
+
   const popup = document.createElement("div");
   popup.className = "popup";
-  popup.innerText = message;
+
+  const popupText = document.createElement("div");
+  popupText.innerText = message;
 
   setTimeout(() => {
-    popup.className += " popup-anim";
+    popup.className += " animation";
+    popupWrapper.className += " animation";
   }, 1);
 
   const popupFooter = document.createElement("div");
@@ -35,7 +42,7 @@ const deleteConfirmation = (message, id) => {
   );
 
   popupFooter.append(buttonOk, buttonCancel);
-  popup.append(popupFooter);
+  popup.append(popupLogo, popupText, popupFooter);
   popupWrapper.append(popup);
 
   body.append(popupWrapper);

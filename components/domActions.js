@@ -105,7 +105,7 @@ export const createTodoDomElement = (todo) => {
 };
 
 function deleteHandler(id) {
-  deleteConfirmation("Are you sure you want to delete this?", id);
+  deleteConfirmation("Are you sure?", id);
 }
 
 function completeTask(id) {
