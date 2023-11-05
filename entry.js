@@ -3,7 +3,6 @@ import {
   cancelTodoButton,
   textArea,
   addTodoButton,
-  todoWrapper,
   emptyNotice,
 } from "./components/domElements.js";
 
@@ -61,7 +60,7 @@ const initializeTodoApp = () => {
 };
 
 export function setTodos(newTodos) {
-  todos = [...newTodos];
+  todos = newTodos;
 }
 
 export default initializeTodoApp;

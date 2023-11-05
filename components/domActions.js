@@ -1,6 +1,8 @@
 import createButton from "../utilities/createButton.js";
 import deleteConfirmation from "../components/deleteConfirmation.js";
 import timeCalculation from "../utilities/TimeCalculation.js";
+import notifyUser from "../utilities/notification.js";
+import editTask from "../utilities/editTask.js";
 import { createTodoDiv, textArea } from "./domElements.js";
 import { todoWrapper, emptyNotice } from "./domElements.js";
 import { todos, setTodos } from "../entry.js";
@@ -31,6 +33,8 @@ export const renderTodoList = () => {
 
   emptyListMessage();
 };
+
+let editedTitle;
 
 export const createTodoDomElement = (todo) => {
   const { id, title, isDone, isEditing, createdAt, completedAt } = todo;
@@ -87,7 +91,12 @@ export const createTodoDomElement = (todo) => {
       () => completeTask(id)
     );
 
-    taskEdit = createButton("button button-icon", "taskEdit", "icon-edit.svg");
+    taskEdit = createButton(
+      "button button-icon",
+      "taskEdit",
+      "icon-edit.svg",
+      () => editTask(id)
+    );
 
     taskDelete = createButton(
       "button button-icon",
@@ -99,6 +108,45 @@ export const createTodoDomElement = (todo) => {
     todoActions.append(taskCompleted, taskEdit, taskDelete);
   }
 
+  if (isEditing) {
+    const textArea = document.createElement("textarea");
+    textArea.className = "input-field area";
+    textArea.value = title;
+    editedTitle = title;
+
+    textArea.addEventListener("input", function () {
+      editedTitle = textArea.value;
+    });
+
+    setTimeout(() => {
+      textArea.focus();
+    }, 1);
+
+    todoHeader.innerText = "";
+    todoHeader.append(textArea);
+
+    let updateTaskButton = createButton(
+      "button button-icon",
+      "updateTask",
+      "icon-update.svg",
+      () => updateTask(id)
+    );
+
+    let undoEditButton = createButton(
+      "button button-icon",
+      "taskDelete",
+      "icon-cancel.svg",
+      () => undoEdit(id)
+    );
+
+    todoActions.innerHTML = "";
+    todoActions.append(updateTaskButton, undoEditButton);
+
+    todoDiv.append(todoHeader, todoDetails, todoActions);
+
+    return todoDiv;
+  }
+
   todoDiv.append(todoHeader, todoDetails, todoActions);
 
   return todoDiv;
@@ -106,6 +154,30 @@ export const createTodoDomElement = (todo) => {
 
 function deleteHandler(id) {
   deleteConfirmation("Are you sure?", id);
+}
+
+function updateTask(id) {
+  const editTodo = todos.filter((todo) => todo.id === id);
+  editTodo[0].isEditing = false;
+
+  if (editedTitle.trim() === "") {
+    notifyUser("Todo can not be empty", "error");
+    return;
+  }
+
+  editTodo[0].title = editedTitle.trim();
+
+  setTodos(todos);
+  renderTodoList();
+  notifyUser("Successfully updated todo");
+  localStorage.setItem("todos", JSON.stringify(todos));
+}
+
+function undoEdit(id) {
+  const editTodo = todos.filter((todo) => todo.id === id);
+  editTodo[0].isEditing = false;
+  setTodos(todos);
+  renderTodoList();
 }
 
 function completeTask(id) {
