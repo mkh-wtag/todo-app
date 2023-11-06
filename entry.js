@@ -23,7 +23,7 @@ const initializeTodoApp = () => {
   loadTodoList();
 
   function loadTodoList() {
-    if (localStorage.getItem("todos") != null) {
+    if (localStorage.getItem("todos") !== null) {
       todos = JSON.parse(localStorage.getItem("todos"));
       renderTodoList();
     }
@@ -32,14 +32,15 @@ const initializeTodoApp = () => {
   const handleTodoSubmit = () => {
     const task = textArea.value;
 
-    if (task === "") {
+    if (task.trim() === "") {
+      textArea.value = "";
       notifyUser("Please enter valid todo", "error");
       return;
     }
 
     const todo = {
       id: new Date().getTime(),
-      title: task,
+      title: task.trim(),
       isDone: false,
       isEditing: false,
       createdAt: timeCalculation(),

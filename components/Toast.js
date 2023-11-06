@@ -1,10 +1,15 @@
+import {
+  ADD_ANIMATION_DELAY,
+  REMOVE_ANIMATION_DELAY,
+} from "../utilities/const.js";
+
 const toast = (message, type) => {
   const toastWrapper = document.createElement("div");
   toastWrapper.className = "toast-wrapper";
 
   setTimeout(() => {
-    toastWrapper.className += " animation";
-  }, 1);
+    toastWrapper.classList.add("animation");
+  }, ADD_ANIMATION_DELAY);
 
   toastWrapper.innerText = message;
   toastWrapper.style.background = "#0ec277";
@@ -14,7 +19,7 @@ const toast = (message, type) => {
 
   setTimeout(() => {
     toastWrapper.classList.remove("animation");
-  }, 1800);
+  }, REMOVE_ANIMATION_DELAY);
 
   return toastWrapper;
 };

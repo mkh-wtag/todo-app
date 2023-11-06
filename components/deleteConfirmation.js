@@ -3,6 +3,7 @@ import notifyUser from "../utilities/notification.js";
 import { body } from "./domElements.js";
 import { todos, setTodos } from "../entry.js";
 import { renderTodoList } from "./domActions.js";
+import { ADD_ANIMATION_DELAY } from "../utilities/const.js";
 
 const deleteConfirmation = (message, id) => {
   const popupWrapper = document.createElement("div");
@@ -19,9 +20,9 @@ const deleteConfirmation = (message, id) => {
   popupText.innerText = message;
 
   setTimeout(() => {
-    popup.className += " animation";
-    popupWrapper.className += " animation";
-  }, 1);
+    popup.classList.add("animation");
+    popupWrapper.classList.add("animation");
+  }, ADD_ANIMATION_DELAY);
 
   const popupFooter = document.createElement("div");
   popupFooter.className = "popup-footer";

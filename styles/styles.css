@@ -193,7 +193,7 @@ h6 {
 }
 
 .button-icon img {
-  width: 1.6rem;;
+  width: 1.6rem;
 }
 
 .button-search {
@@ -225,7 +225,7 @@ h6 {
 .todo-wrapper {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
-  gap: 1.5rem;
+  gap: 2rem;
   margin-bottom: 4rem;
 }
 
@@ -233,10 +233,31 @@ h6 {
   padding: 1.5rem 10px;
   border-radius: 0.3rem;
   background: linear-gradient(90deg, var(--info-color-light), var(--white) 15%);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 0.1rem rgba(0, 0, 0, 0.5);
   border-left: 0.5rem solid var(--info-color);
   display: flex;
   flex-direction: column;
+  position: relative;
+}
+
+.todo::before,
+.todo::after {
+  content: "";
+  position: absolute;
+  width: 60%;
+  height: 5rem;
+  background: rgba(0, 0, 0, 0.2);
+  filter: blur(0.3rem);
+  transform: rotate(2deg);
+  right: 0.6rem;
+  bottom: 0;
+  z-index: -1;
+}
+
+.todo::after {
+  right: auto;
+  left: 0.6rem;
+  transform: rotate(-2deg);
 }
 
 .todo-completed {

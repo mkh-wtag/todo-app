@@ -6,6 +6,7 @@ import editTask from "../utilities/editTask.js";
 import { createTodoDiv, textArea } from "./domElements.js";
 import { todoWrapper, emptyNotice } from "./domElements.js";
 import { todos, setTodos } from "../entry.js";
+import { ADD_ANIMATION_DELAY } from "../utilities/const.js";
 
 export const openCreateTodo = () => {
   createTodoDiv.classList.add("open-create-todo");
@@ -120,19 +121,19 @@ export const createTodoDomElement = (todo) => {
 
     setTimeout(() => {
       textArea.focus();
-    }, 1);
+    }, ADD_ANIMATION_DELAY);
 
     todoHeader.innerText = "";
     todoHeader.append(textArea);
 
-    let updateTaskButton = createButton(
+    const updateTaskButton = createButton(
       "button button-icon",
       "updateTask",
       "icon-update.svg",
       () => updateTask(id)
     );
 
-    let undoEditButton = createButton(
+    const undoEditButton = createButton(
       "button button-icon",
       "taskDelete",
       "icon-cancel.svg",
@@ -157,15 +158,20 @@ function deleteHandler(id) {
 }
 
 function updateTask(id) {
-  const editTodo = todos.filter((todo) => todo.id === id);
-  editTodo[0].isEditing = false;
+  const editTodo = todos.find((todo) => todo.id === id);
+
+  if (editTodo === undefined) {
+    return;
+  }
+
+  editTodo.isEditing = false;
 
   if (editedTitle.trim() === "") {
     notifyUser("Todo can not be empty", "error");
     return;
   }
 
-  editTodo[0].title = editedTitle.trim();
+  editTodo.title = editedTitle.trim();
 
   setTodos(todos);
   renderTodoList();
@@ -174,16 +180,26 @@ function updateTask(id) {
 }
 
 function undoEdit(id) {
-  const editTodo = todos.filter((todo) => todo.id === id);
-  editTodo[0].isEditing = false;
+  const editTodo = todos.find((todo) => todo.id === id);
+
+  if (editTodo === undefined) {
+    return;
+  }
+
+  editTodo.isEditing = false;
   setTodos(todos);
   renderTodoList();
 }
 
 function completeTask(id) {
-  const completedTodo = todos.filter((todo) => todo.id === id);
-  completedTodo[0].isDone = true;
-  completedTodo[0].completedAt = timeCalculation();
+  const completedTodo = todos.find((todo) => todo.id === id);
+
+  if (completedTodo === undefined) {
+    return;
+  }
+
+  completedTodo.isDone = true;
+  completedTodo.completedAt = timeCalculation();
 
   setTodos(todos);
   renderTodoList();
