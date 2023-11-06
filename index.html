@@ -25,17 +25,17 @@
     <form>
       <section class="actions">
         <div class="search-panel">
-          <input type="text" class="input-field input-search" placeholder="Search tasks" />
-          <button type="button" class="button button-icon button-search">
+          <input type="text" class="input-field input-search" placeholder="Search tasks" id="searchTaskInput" />
+          <button type="button" class="button button-icon button-search" id="searchTaskButton">
             <img src="./public/icon-search.svg" alt="search icon" />
           </button>
         </div>
   
         <div class="filter">
           Filter: 
-          <button type="button" class="button button-success">All</button>
-          <button type="button" class="button button-success">Incomplete</button>
-          <button type="button" class="button button-success">Complete</button>
+          <button type="button" class="button button-success" id="filterAllButton">All</button>
+          <button type="button" class="button button-success" id="filterIncompleteButton">Incomplete</button>
+          <button type="button" class="button button-success" id="filterCompleteButton">Complete</button>
         </div>
       </section>
 
@@ -59,7 +59,7 @@
     <section class="todo-wrapper" id="todoWrapper"></section>
 
     <section class="load-more-wrapper">
-      <button type="button" class="button button-info">Load more</button>
+      <button type="button" class="button button-info" id="loadMoreButton">Load more</button>
     </section>
   </main>
 

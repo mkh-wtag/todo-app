@@ -1,14 +1,15 @@
 import toast from "../components/Toast.js";
-import { todoWrapper, textArea } from "../components/domElements.js";
+import { body, textArea } from "../components/domElements.js";
+import { REMOVE_ELEMENT_DELAY } from "./const.js";
 
 const notifyUser = (message, type) => {
   const notifyUserNotice = toast(message, type);
 
   if (!textArea.value) {
-    todoWrapper.appendChild(notifyUserNotice);
+    body.appendChild(notifyUserNotice);
     setTimeout(() => {
       notifyUserNotice.remove();
-    }, 2000);
+    }, REMOVE_ELEMENT_DELAY);
 
     return;
   }
