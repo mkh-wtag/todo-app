@@ -13,11 +13,11 @@ function searchTodo() {
   renderTodoList();
 }
 
-export function debounceSearch(fn, delay) {
+export function debounceSearch(fn, delay = 500) {
   let timer;
 
   return function () {
-    timer && clearTimeout(timer);
+    clearTimeout(timer);
 
     timer = setTimeout(() => {
       fn();

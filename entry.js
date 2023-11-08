@@ -32,7 +32,7 @@ const initializeTodoApp = () => {
     }
   }
 
-  globalTodos = todos;
+  globalTodos = [...todos];
 
   const handleTodoSubmit = () => {
     const task = textArea.value;
@@ -53,7 +53,7 @@ const initializeTodoApp = () => {
     };
 
     todos.push(todo);
-    globalTodos = todos;
+    globalTodos = [...todos];
 
     renderTodoList();
     textArea.value = "";
@@ -68,7 +68,7 @@ const initializeTodoApp = () => {
 };
 
 export function setTodos(newTodos) {
-  todos = newTodos;
+  todos = [...newTodos];
 }
 
 searchTodoInput.addEventListener("input", debounceSearch(searchTodo, 500));
