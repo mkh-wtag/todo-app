@@ -133,7 +133,7 @@ h6 {
 .input-search {
   width: 40rem;
   height: 5rem;
-  padding: 0 5rem 0 1.5rem;
+  padding: 0 1.5rem;
 }
 
 .create-holder {
@@ -194,12 +194,6 @@ h6 {
 
 .button-icon img {
   width: 1.6rem;
-}
-
-.button-search {
-  margin-left: -4rem;
-  padding: 0.8rem 0 0.8rem 1rem;
-  border-left: 0.1rem solid rgba(0, 0, 0, 0.1);
 }
 
 .button-icon:hover {
@@ -283,7 +277,7 @@ h6 {
   gap: 1rem;
   margin-bottom: 1.5rem;
   text-shadow: 1px 1px 0 var(--white);
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   color: var(--gray);
   font-style: italic;
 }

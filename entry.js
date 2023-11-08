@@ -4,6 +4,7 @@ import {
   textArea,
   addTodoButton,
   emptyNotice,
+  searchTodoInput,
 } from "./components/domElements.js";
 
 import { renderTodoList, emptyListMessage } from "./components/domActions.js";
@@ -11,8 +12,10 @@ import { renderTodoList, emptyListMessage } from "./components/domActions.js";
 import { openCreateTodo, cancelTodo } from "./components/domActions.js";
 import notifyUser from "./utilities/notification.js";
 import timeCalculation from "./utilities/TimeCalculation.js";
+import searchTodo, { debounceSearch } from "./components/searchTodo.js";
 
 let todos = [];
+let globalTodos;
 
 const initializeTodoApp = () => {
   buttonCreate.addEventListener("click", openCreateTodo);
@@ -28,6 +31,8 @@ const initializeTodoApp = () => {
       renderTodoList();
     }
   }
+
+  globalTodos = todos;
 
   const handleTodoSubmit = () => {
     const task = textArea.value;
@@ -46,7 +51,9 @@ const initializeTodoApp = () => {
       createdAt: timeCalculation(),
       completedAt: null,
     };
+
     todos.push(todo);
+    globalTodos = todos;
 
     renderTodoList();
     textArea.value = "";
@@ -64,6 +71,8 @@ export function setTodos(newTodos) {
   todos = newTodos;
 }
 
+searchTodoInput.addEventListener("input", debounceSearch(searchTodo, 500));
+
 export default initializeTodoApp;
 
-export { todos };
+export { globalTodos, todos };

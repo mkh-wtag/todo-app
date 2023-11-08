@@ -6,11 +6,13 @@ import editTask from "../utilities/editTask.js";
 import { createTodoDiv, textArea } from "./domElements.js";
 import { todoWrapper, emptyNotice } from "./domElements.js";
 import { todos, setTodos } from "../entry.js";
-import { ADD_ANIMATION_DELAY } from "../utilities/const.js";
+import { ADD_ANIMATION_DELAY, FOCUS_DELAY } from "../utilities/const.js";
 
 export const openCreateTodo = () => {
   createTodoDiv.classList.add("open-create-todo");
-  textArea.focus();
+  setTimeout(() => {
+    textArea.focus();
+  }, FOCUS_DELAY);
 };
 
 export const cancelTodo = () => {
