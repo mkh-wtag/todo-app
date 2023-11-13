@@ -3,8 +3,13 @@ import deleteConfirmation from "../components/deleteConfirmation.js";
 import timeCalculation from "../utilities/TimeCalculation.js";
 import notifyUser from "../utilities/notification.js";
 import editTask from "../utilities/editTask.js";
-import { createTodoDiv, textArea } from "./domElements.js";
-import { todoWrapper, emptyNotice } from "./domElements.js";
+import {
+  createTodoDiv,
+  todoWrapper,
+  emptyNotice,
+  textArea,
+  searchTodoInput,
+} from "./domElements.js";
 import { todos, setTodos } from "../entry.js";
 import { ADD_ANIMATION_DELAY } from "../utilities/const.js";
 
@@ -27,8 +32,19 @@ export function emptyListMessage() {
 
 export const renderTodoList = () => {
   todoWrapper.innerHTML = "";
+  let filteredTodos = [];
 
-  todos.forEach((todo) => {
+  const searchedText = searchTodoInput.value.toLowerCase();
+
+  if (searchedText !== "") {
+    filteredTodos = todos.filter((todo) =>
+      todo.title.toLowerCase().includes(searchedText)
+    );
+  } else {
+    filteredTodos = todos;
+  }
+
+  filteredTodos.forEach((todo) => {
     todoWrapper.append(createTodoDomElement(todo));
   });
 

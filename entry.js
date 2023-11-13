@@ -4,6 +4,7 @@ import {
   textArea,
   addTodoButton,
   emptyNotice,
+  searchTodoInput,
 } from "./components/domElements.js";
 
 import { renderTodoList, emptyListMessage } from "./components/domActions.js";
@@ -11,6 +12,7 @@ import { renderTodoList, emptyListMessage } from "./components/domActions.js";
 import { openCreateTodo, cancelTodo } from "./components/domActions.js";
 import notifyUser from "./utilities/notification.js";
 import timeCalculation from "./utilities/TimeCalculation.js";
+import searchTodo from "./components/searchTodo.js";
 
 let todos = [];
 
@@ -59,6 +61,8 @@ const initializeTodoApp = () => {
 
   addTodoButton.addEventListener("click", handleTodoSubmit);
 };
+
+searchTodoInput.addEventListener("input", searchTodo);
 
 export function setTodos(newTodos) {
   todos = newTodos;
