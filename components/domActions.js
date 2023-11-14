@@ -10,7 +10,7 @@ import {
   textArea,
   searchTodoInput,
 } from "./domElements.js";
-import { todos, setTodos } from "../entry.js";
+import { todos, setTodos, currentFilterState } from "../entry.js";
 import { ADD_ANIMATION_DELAY } from "../utilities/const.js";
 
 export const openCreateTodo = () => {
@@ -41,7 +41,18 @@ export const renderTodoList = () => {
       todo.title.toLowerCase().includes(searchedText)
     );
   } else {
-    filteredTodos = todos;
+    switch (currentFilterState) {
+      case "complete":
+        filteredTodos = todos.filter((todo) => todo.isDone === true);
+        break;
+
+      case "incomplete":
+        filteredTodos = todos.filter((todo) => todo.isDone === false);
+        break;
+
+      default:
+        filteredTodos = [...todos];
+    }
   }
 
   filteredTodos.forEach((todo) => {
