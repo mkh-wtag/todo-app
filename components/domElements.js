@@ -14,4 +14,7 @@ export const filterIncompleteButton = document.querySelector(
 export const filterCompleteButton = document.querySelector(
   "#filterCompleteButton"
 );
+export const filterButtonWrapper = document.querySelector(
+  "#filterButtonWrapper"
+);
 export const loadMoreButton = document.querySelector("#loadMoreButton");

@@ -7,11 +7,11 @@ function searchTodo() {
 export function debounceSearch(fn, delay = 500) {
   let timer;
 
-  return function () {
+  return function (...args) {
     clearTimeout(timer);
 
     timer = setTimeout(() => {
-      fn();
+      fn.apply(this, args);
     }, delay);
   };
 }
