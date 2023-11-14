@@ -6,30 +6,31 @@ import {
   filterCompleteButton,
   filterIncompleteButton,
 } from "./domElements.js";
+import { ALL, COMPLETED, INCOMPLETE } from "../utilities/const.js";
 
 const filterButtons = filterButtonWrapper.getElementsByClassName("button");
 
 function selectedClass(clicked) {
-  for (let current of filterButtons) {
-    current.classList.remove("active");
+  for (let button of filterButtons) {
+    button.classList.remove("active");
   }
   clicked.classList.add("active");
 }
 
 export function filterAll() {
-  setCurrentFilterState("all");
+  setCurrentFilterState(ALL);
   selectedClass(filterAllButton);
   renderTodoList();
 }
 
 export function filterComplete() {
-  setCurrentFilterState("complete");
+  setCurrentFilterState(COMPLETED);
   selectedClass(filterCompleteButton);
   renderTodoList();
 }
 
 export function filterIncomplete() {
-  setCurrentFilterState("incomplete");
+  setCurrentFilterState(INCOMPLETE);
   selectedClass(filterIncompleteButton);
   renderTodoList();
 }

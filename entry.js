@@ -21,9 +21,10 @@ import {
   filterComplete,
   filterIncomplete,
 } from "./components/filterTodos.js";
+import { ALL } from "./utilities/const.js";
 
 let todos = [];
-let currentFilterState = "all";
+let currentFilterState = ALL;
 
 const initializeTodoApp = () => {
   buttonCreate.addEventListener("click", openCreateTodo);

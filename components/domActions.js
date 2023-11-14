@@ -10,6 +10,7 @@ import {
   textArea,
   searchTodoInput,
 } from "./domElements.js";
+import { COMPLETED, INCOMPLETE } from "../utilities/const.js";
 import { todos, setTodos, currentFilterState } from "../entry.js";
 import { ADD_ANIMATION_DELAY } from "../utilities/const.js";
 
@@ -37,12 +38,12 @@ export const renderTodoList = () => {
   const searchedText = searchTodoInput.value.toLowerCase();
 
   switch (currentFilterState) {
-    case "complete":
-      filteredTodos = todos.filter((todo) => todo.isDone === true);
+    case COMPLETED:
+      filteredTodos = todos.filter((todo) => todo.isDone);
       break;
 
-    case "incomplete":
-      filteredTodos = todos.filter((todo) => todo.isDone === false);
+    case INCOMPLETE:
+      filteredTodos = todos.filter((todo) => !todo.isDone);
       break;
 
     default:
