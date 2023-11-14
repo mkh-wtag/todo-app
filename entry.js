@@ -15,7 +15,7 @@ import { renderTodoList, emptyListMessage } from "./components/domActions.js";
 import { openCreateTodo, cancelTodo } from "./components/domActions.js";
 import notifyUser from "./utilities/notification.js";
 import timeCalculation from "./utilities/TimeCalculation.js";
-import searchTodo from "./components/searchTodo.js";
+import searchTodo, { debounceSearch } from "./components/searchTodo.js";
 import {
   filterAll,
   filterComplete,
@@ -71,7 +71,7 @@ const initializeTodoApp = () => {
   addTodoButton.addEventListener("click", handleTodoSubmit);
 };
 
-searchTodoInput.addEventListener("input", searchTodo);
+searchTodoInput.addEventListener("input", debounceSearch(searchTodo, 500));
 
 filterAllButton.addEventListener("click", filterAll);
 filterCompleteButton.addEventListener("click", filterComplete);
