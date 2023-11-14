@@ -3,9 +3,15 @@ import deleteConfirmation from "../components/deleteConfirmation.js";
 import timeCalculation from "../utilities/TimeCalculation.js";
 import notifyUser from "../utilities/notification.js";
 import editTask from "../utilities/editTask.js";
-import { createTodoDiv, textArea } from "./domElements.js";
-import { todoWrapper, emptyNotice } from "./domElements.js";
-import { todos, setTodos } from "../entry.js";
+import {
+  createTodoDiv,
+  todoWrapper,
+  emptyNotice,
+  textArea,
+  searchTodoInput,
+} from "./domElements.js";
+import { COMPLETED, INCOMPLETE } from "../utilities/const.js";
+import { todos, setTodos, currentFilterState } from "../entry.js";
 import { ADD_ANIMATION_DELAY } from "../utilities/const.js";
 
 export const openCreateTodo = () => {
@@ -27,8 +33,30 @@ export function emptyListMessage() {
 
 export const renderTodoList = () => {
   todoWrapper.innerHTML = "";
+  let filteredTodos;
 
-  todos.forEach((todo) => {
+  const searchedText = searchTodoInput.value.toLowerCase();
+
+  switch (currentFilterState) {
+    case COMPLETED:
+      filteredTodos = todos.filter((todo) => todo.isDone);
+      break;
+
+    case INCOMPLETE:
+      filteredTodos = todos.filter((todo) => !todo.isDone);
+      break;
+
+    default:
+      filteredTodos = [...todos];
+  }
+
+  if (searchedText !== "") {
+    filteredTodos = filteredTodos.filter((todo) =>
+      todo.title.toLowerCase().includes(searchedText)
+    );
+  }
+
+  filteredTodos.forEach((todo) => {
     todoWrapper.append(createTodoDomElement(todo));
   });
 

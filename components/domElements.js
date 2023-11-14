@@ -6,13 +6,15 @@ export const cancelTodoButton = document.querySelector("#cancelTodo");
 export const textArea = document.querySelector("#enterTodo");
 export const addTodoButton = document.querySelector("#addTodo");
 export const emptyNotice = document.createElement("h2");
-export const searchTaskInput = document.querySelector("#searchTaskInput");
-export const searchTaskButton = document.querySelector("#searchTaskButton");
+export const searchTodoInput = document.querySelector("#searchTodoInput");
 export const filterAllButton = document.querySelector("#filterAllButton");
 export const filterIncompleteButton = document.querySelector(
   "#filterIncompleteButton"
 );
 export const filterCompleteButton = document.querySelector(
   "#filterCompleteButton"
+);
+export const filterButtonWrapper = document.querySelector(
+  "#filterButtonWrapper"
 );
 export const loadMoreButton = document.querySelector("#loadMoreButton");
