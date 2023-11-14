@@ -32,27 +32,27 @@ export function emptyListMessage() {
 
 export const renderTodoList = () => {
   todoWrapper.innerHTML = "";
-  let filteredTodos = [];
+  let filteredTodos;
 
   const searchedText = searchTodoInput.value.toLowerCase();
 
+  switch (currentFilterState) {
+    case "complete":
+      filteredTodos = todos.filter((todo) => todo.isDone === true);
+      break;
+
+    case "incomplete":
+      filteredTodos = todos.filter((todo) => todo.isDone === false);
+      break;
+
+    default:
+      filteredTodos = [...todos];
+  }
+
   if (searchedText !== "") {
-    filteredTodos = todos.filter((todo) =>
+    filteredTodos = filteredTodos.filter((todo) =>
       todo.title.toLowerCase().includes(searchedText)
     );
-  } else {
-    switch (currentFilterState) {
-      case "complete":
-        filteredTodos = todos.filter((todo) => todo.isDone === true);
-        break;
-
-      case "incomplete":
-        filteredTodos = todos.filter((todo) => todo.isDone === false);
-        break;
-
-      default:
-        filteredTodos = [...todos];
-    }
   }
 
   filteredTodos.forEach((todo) => {
